@@ -1,0 +1,43 @@
+A Padovan Sequence is a sequence which is represented by the following recurrence relation
+P(n) = P(n-2) + P(n-3)
+P(0) = P(1) = P(2) = 1
+Input: n = 4
+Output: 2
+Explanation: We already know, P4  = P2 + P1 and P2 = 1 and P1 = 1
+#code:
+class Solution
+{
+    public:
+    int padovanSequence(int n)
+    {      // base case
+         if(n == 0 || n == 1 || n == 2){
+           return 1;
+       }
+      // recursive call
+       int ans =  padovanSequence(n-2) +  padovanSequence(n-3);
+       return ans;
+    }
+    
+};
+
+#optimal code :
+class Solution
+{
+    
+    public:
+    int padovanSequence(int n)
+    {
+         if(n == 0 || n == 1 || n == 2){
+           return 1;
+       }
+       int a=1,b=1,c=1, temp =0 , mod = 1e9+7;
+       for(int i=3; i<=n; i++){
+            temp = (a+b) % mod;
+            a = b;
+            b = c;
+            c = temp;
+       }
+       return c;
+    }
+    
+};

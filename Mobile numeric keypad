@@ -1,0 +1,31 @@
+Input: n = 2
+Output: 36
+Explanation: Possible numbers: 00, 08, 11, 12, 14, 22, 21, 23, 25 and so on. If we start with 0, valid numbers will be 00, 08 (count: 2).
+If we start with 1, valid numbers will be 11, 12, 14 (count: 3). If we start with 2, valid numbers  will be 22, 21, 23,25 (count: 4).
+If we start with 3, valid numbers will be 33, 32, 36 (count: 3). If we start with 4, valid numbers will be 44,41,45,47 (count: 4). If we start with 5, valid numbers will be 55,54,52,56,58 (count: 5) and so on.
+#code:
+class Solution {
+  private:
+   long long help(int i, int j , int n ,  vector<vector<vector<long long>>>  &dp ){
+       if(i>3 or j>2 or i<0 or j<0)return 0; // out of matrix condition
+       if(i == 3 and (j== 0 or j == 2))return 0; // * and # value
+       if(n == 1) return 1;
+       if(dp[i][j][n] != -1) return dp[i][j][n];
+       n--;
+       return dp[i][j][n+1] = help(i-1,j,n,dp) + help(i,j-1,n,dp) + help(i+1,j,n,dp) 
+                               + help(i,j+1,n,dp) + help(i,j,n,dp);
+       // go to left , right , upper , lower or same place
+   }
+  public:
+    long long getCount(int n) {
+       long long ans = 0;
+       vector<vector<vector<long long>>> dp(4,vector<vector<long long>>(3,vector<long long>(n+1,-1)));
+       for(int i=0; i<4; i++){
+           for(int j=0; j<3; j++){
+               if(i == 3 and (j== 0 or j == 2)) continue;
+               ans += help(i,j,n,dp);
+           }
+       }
+       return ans;
+    }
+};

@@ -1,0 +1,34 @@
+Input: n = 10
+Output: 3 7
+Explanation: There are two possiblities 3, 7 & 5, 5 are both prime & their sum is 10, but we'll pick 3, 7 as 3 < 5.
+#code:
+this sol has TLE(time limit exceeded)
+class Solution {
+    
+ private:
+    bool isprime(int n){
+        if(n <= 1){
+            return false;
+        }
+        for(int i=2; i<=n/2; i++){
+            if(n % i == 0){
+                return false;
+            }
+        }
+        return true;
+        
+    }
+  public:
+    vector<int> getPrimes(int n) {
+        vector<int>ans;
+        for(int i=2; i<=n; i++){
+            int j = n-i;
+            if(isprime(i) && isprime(j) ){
+                return {i,n-i};
+                break;
+            }
+        
+      }
+      return {-1,-1};
+    }
+};

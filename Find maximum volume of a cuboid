@@ -1,0 +1,20 @@
+Input: perimeter = 22, area = 15
+Output: 3.02
+Explanation: The maximum attainable volume of the cuboid is 3.02
+#code:
+class Solution {
+  public:
+    double maxVolume(double perimeter, double area) {
+        //P = 4(l+b+h) —(i)
+        //A = 2 (lb+bh+lh) —(ii). 
+        //Volume of cuboid is V = lbh
+        //After solving the quadratic in l we have l = (P – (P2-24A)1/2) / 12 
+        // calculate length
+       double l = (double)(perimeter - sqrt(perimeter * perimeter - 24 * area)) / 12;
+       
+       double height = (perimeter / 4) - (2 *(l));
+       double ans = l*l*height;
+       return ans;
+       
+    }
+};

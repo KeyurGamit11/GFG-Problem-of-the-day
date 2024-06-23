@@ -1,0 +1,30 @@
+Input:  str = "(aa(bdc))p(dee)"
+Output: 1 2 2 1 3 3
+Explanation: The highlighted brackets in
+the given string (aa(bdc))p(dee) are
+assigned the numbers as: 1 2 2 1 3 3.
+#step: take stack and vector ans 
+take cnt of left para 0 if we found left para '(' . increment cnt , push cnt into stack and push stack top into ans
+if we found right para ')' stack top push into ans and pop it , dry run it u will understand
+#code:
+class Solution {
+  public:
+
+    vector<int> bracketNumbers(string str) {
+        stack<int>st;
+        vector<int>ans;
+        int cntofleft = 0;
+        for(int i=0; i<str.size(); i++){
+            if(str[i] == '('){
+                cntofleft++;
+                st.push(cntofleft);
+                ans.push_back(st.top());
+            }
+            else if(str[i] == ')'){
+                ans.push_back(st.top());
+                st.pop();
+            }
+        }
+        return ans;
+    }
+};

@@ -1,0 +1,25 @@
+Input: k=1, mat=[[1,2,3],[4,5,6],[7,8,9]]
+Output:
+2 3 1
+5 6 4
+8 9 7
+Explanation: Rotate the matrix by one
+1 2 3       2 3 1
+4 5 6  =>  5 6 4
+7 8 9       8 9 7
+#code:
+class Solution {
+  public:
+    vector<vector<int>> rotateMatrix(int k, vector<vector<int>> mat) {
+        int n = mat.size();
+        int m = mat[0].size();
+        k = k % m; // in case if k is more than mat size
+        
+        for(auto &row : mat){
+            reverse(row.begin(), row.end()); // first reverse full row
+            reverse(row.rbegin() , row.rbegin() + k); // reverse till k value
+            reverse(row.rbegin() + k , row.rend()); // reverse after k till end
+        }
+        return mat;
+    }
+};

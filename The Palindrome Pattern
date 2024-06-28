@@ -1,0 +1,46 @@
+Input: 
+arr[][] =  [[1, 0, 0], 
+           [0, 1, 0],
+           [1, 1, 0]]
+Output: 1 R
+Explanation: In the first test case, 0-1-0 is a palindrome 
+occuring in a row having index 1.
+#code:
+class Solution {
+  public:
+    bool palindrom(int arr[] , int n){
+        for(int i=0; i<n; i++){
+            if(arr[i] != arr[n-1-i]){
+                return false;
+            }
+        }
+        return true;
+    }
+    string pattern(vector<vector<int>> &arr) {
+        int n = arr.size();
+        string ans = "-1";
+        // for check first in row
+        for(int i=0; i<n; i++){
+            int currow[n];
+            for(int j=0; j<n; j++){
+                currow[j] = arr[i][j]; // put currrow in here
+            }
+            if(palindrom(currow , n)){ // apply palindrom check fun in curr row
+                ans = to_string(i) + " R"; // put ans in index and R
+                return ans;
+            }
+        }
+        // for check col
+        for(int j=0; j<n; j++){
+            int currcol[n];
+            for(int i=0; i<n; i++){
+                currcol[i] = arr[i][j]; // put curr col in here
+            }
+            if(palindrom(currcol , n)){ // apply palindrom check fun in curr col
+                ans = to_string(j) + " C"; // put ans in index and C
+                return ans;
+            }
+        }
+        return ans; // if not found anything return -1
+    }
+};

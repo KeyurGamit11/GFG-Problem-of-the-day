@@ -1,0 +1,36 @@
+Input:
+LinkedList1: 1->2->3->4->5->6
+LinkedList2: 99->59->42->20
+Output: false
+#code:
+/*
+Structure of the node of the linked list is as
+struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};
+*/
+
+// Function to check whether two linked lists are identical or not.
+bool areIdentical(struct Node *head1, struct Node *head2) {
+    struct Node* temp1 = head1;
+    struct Node* temp2 = head2;
+    while(temp1 != NULL && temp2 != NULL){
+        if(temp1 -> data != temp2 -> data){
+            return false;
+        }
+        temp1 = temp1 -> next;
+        temp2 = temp2 -> next;
+    }
+    // ensure that both temp1 and temp2 reach to the null
+    if(temp1 == NULL && temp2 == NULL){
+        return true;
+    }
+    else{
+        return false;
+    }
+}

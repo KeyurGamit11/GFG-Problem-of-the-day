@@ -1,0 +1,59 @@
+its left, and right children are stored at position 2*i+1, and 2*i+2
+Input: n = 5, k = 1->2->3->4->5
+Output: 1 2 3 4 5
+Explanation: The tree would look like
+      1
+    /   \
+   2     3
+ /  \
+4   5
+Now, the level order traversal of
+the above tree is 1 2 3 4 5.
+#code:
+
+
+/*
+The structure of Link list Node is as follows
+struct Node
+{
+    int data;
+    struct node* next;
+
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+The structure of TreeNode is as follows
+struct TreeNode
+{
+    int data;
+    TreeNode *left;
+    TreeNode *right;
+};
+*/
+
+// Function to make binary tree from linked list.
+TreeNode *solve(vector<int>&arr , int i){
+    //base case is that we have to check if i greater than arr.size
+    if(i >= arr.size()){
+        return NULL;
+    }
+    // recursive call
+    TreeNode *newNode = new TreeNode(arr[i]); // make a  new treenode
+    newNode -> left = solve(arr, 2*i+1); // for put element in  left subtree 
+    newNode -> right = solve(arr , 2*i+2); // for put element in right subtree formula is given in que
+    return newNode;
+}
+
+void convert(Node *head, TreeNode *&root) {
+    vector<int>arr;
+    Node *temp = head;   // first we make arr and put all linked list element into array
+    while(temp != NULL){
+        arr.push_back(temp -> data);
+        temp = temp -> next;
+    }
+    root = solve(arr,0); // function call
+    
+    
+}

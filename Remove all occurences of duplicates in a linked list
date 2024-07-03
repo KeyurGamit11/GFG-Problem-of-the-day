@@ -1,0 +1,49 @@
+Input: Linked List = 23->28->28->35->49->49->53->53
+Output: 23 35
+Explanation: The duplicate numbers are 28, 49 and 53 which are removed from the list.
+#code:
+// User function Template for C++
+
+/* Linked List node structure
+
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+*/
+
+class Solution {
+  public:
+    Node* removeAllDuplicates(struct Node* head) {
+        struct Node*temp = head;
+        struct Node*prev = NULL;
+        while(temp != NULL){
+            int cnt = 0;
+            while(temp != NULL && temp -> next != NULL){
+                if(temp -> data == temp -> next -> data){
+                    temp = temp -> next;
+                    cnt++;
+                }
+                else{
+                    break;
+                }
+            }
+            if(cnt > 0){ // means we found duplicate
+                if(prev != NULL){
+                    prev -> next = temp -> next;
+                    temp = prev -> next;
+                }
+                else{// if head is duplicate
+                    head = temp -> next;
+                    temp = head;
+                }
+            }
+            else{// if duplicate not found simply increment temp , prev
+                prev = temp;
+                temp = temp -> next;
+            }
+        }
+        return head;
+    }
+};

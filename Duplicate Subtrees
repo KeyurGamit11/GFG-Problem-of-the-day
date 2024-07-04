@@ -1,0 +1,31 @@
+#step:
+so we take map in here we store subtree as string and thire count as int
+if found found duplicate then we store it
+in map we store like this "2N4N" like this dry run it for better understanding
+#code:
+class Solution {
+  private:
+    string solve(Node* root ,unordered_map<string,int>&mp , vector<Node*>&ans){
+        //base case
+        if(!root){
+            return "N"; // if you found null put N in string 
+        }
+        
+        string s = to_string(root -> data) + "," +
+        solve(root ->left , mp , ans) + "." + // go into left subtree and store int s
+        solve(root -> right , mp , ans); // go onto right subtree
+        
+        mp[s]++; // store into mp
+        if(mp[s] == 2){ // that means duplicate store into ans
+            ans.push_back(root); 
+        }
+        return s;
+    }
+  public:
+    vector<Node*> printAllDups(Node* root) {
+       unordered_map<string,int>mp;
+       vector<Node*>ans;
+       solve(root , mp , ans);
+       return ans;
+    }
+};

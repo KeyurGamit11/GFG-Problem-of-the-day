@@ -1,0 +1,38 @@
+Input:
+         1
+       /    \
+      2      3
+     / \    /  \
+    4   5  6   7
+            \   \
+             8   9
+Output: 6
+Explanation: The width of a binary tree is
+the number of vertical paths in that tree.
+#code:
+//Back-end complete function Template for C++
+class Solution {
+  public:
+    
+    int maxi = 0;
+    int mini = 0;
+    void solve(Node* root , int distance){
+        //base case
+        if(root == NULL){
+            return;
+        }
+        //recursive call
+        maxi = max(maxi,distance); // go into left subtree
+        mini = min(mini,distance); // go into right subtree
+        solve(root -> left , distance -1); // if we go to left distance decrement
+        solve(root -> right , distance+1); // if we go to right distance increment
+
+    }
+    int verticalWidth(Node* root) {
+        if(root == NULL){
+            return 0;
+        }
+        solve(root , 0); // we take root value as 0 if we left side decrement and right side incremen
+        return maxi - mini + 1;
+    }
+};

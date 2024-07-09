@@ -1,0 +1,42 @@
+Input: arr[] = [5, 2, 7, 5], target = 13
+Output: 14
+Explanation: There is one triplet with sum 12 and other with sum 14 in the array. Triplet elements are 5, 2, 5 and 2, 7, 5 respectively. Since abs(13-12) ==abs(13-14) maximum triplet sum will be preferred i.e 14.
+#code:
+// User function template for C++
+
+// arr : given vector of elements
+// target : given sum value
+
+class Solution {
+  public:
+    int threeSumClosest(vector<int> arr, int target) {
+        
+        int ans=INT_MAX;
+        int diff = INT_MAX;
+        sort(arr.begin(),arr.end());
+        for(int i=0; i<arr.size(); i++){
+            int s=i+1;
+            int e = arr.size()-1;
+            while(s < e){
+                int sum = arr[i] + arr[s] + arr[e];
+                if(sum == target){
+                    return sum;
+                }
+                else if(sum < target){
+                    s++;
+                }
+                else{
+                    e--;
+                }
+                if(abs(sum - target) < diff){
+                    diff = abs(sum - target);
+                    ans = sum;
+                }
+                else if(abs(sum - target) == diff){
+                    ans = max(ans,sum);
+                }
+            }
+        }
+        return ans;
+    }
+};

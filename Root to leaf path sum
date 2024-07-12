@@ -1,0 +1,30 @@
+Input: tree = 1,  target = 4
+            /   \
+          2     3
+Output: true
+Explanation: The sum of path from leaf node 3 to root 1 is 4
+#code:
+/* A binary tree node
+struct Node
+{
+    int data;
+    Node* left, * right;
+}; */
+
+/*you are required to
+complete this function */
+class Solution {
+  public:
+    bool hasPathSum(Node *root, int target) {
+        //base case
+        if(root == NULL){
+            return false;
+        }
+        //recursive call
+        if(root -> left == NULL && root -> right == NULL){
+            return target == root -> data;
+        }
+        int newtarget = target - root -> data;
+        return hasPathSum(root -> left , newtarget) || hasPathSum(root -> right , newtarget);
+    }
+};

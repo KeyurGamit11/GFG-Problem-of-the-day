@@ -1,0 +1,21 @@
+Input: arr[] = [0, 0, 1, 1, 0]
+Output: [0, 0, 0, 1, 1]
+Explanation:  After segregation, all the 0's are on the left and 1's are on the right. Modified array will be [0, 0, 0, 1, 1].
+#step: take index at 0 if we found 0 in arr we swap it and and increment 0 index this process continue
+#code:
+
+// User function template for C++
+
+class Solution {
+  public:
+    void segregate0and1(vector<int> &arr) {
+        // code here
+        int zero =  0;
+        for(int i=0; i<arr.size(); i++){
+            if(arr[i] == 0){
+                swap(arr[i] , arr[zero]);
+                zero++;
+            }
+        }
+    }
+};

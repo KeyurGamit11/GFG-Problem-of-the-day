@@ -1,0 +1,30 @@
+Input: s = "Thisisdemostring", ch = 'i', count = 3
+Output: ng
+Explanation: The remaining substring of s after the 3rd
+occurrence of 'i' is "ng", hence the output is ng.
+#code:
+// User function template for C++
+class Solution {
+  public:
+
+    string printString(string s, char ch, int count) {
+        string ans = "";
+        int cnt = 0;
+        int index = -1;
+        for(int i=0; i<s.size(); i++){
+            if(s[i] == ch){
+               cnt++;
+            }
+            if(cnt == count){
+              index = i;
+              break;
+           }
+        }
+        if(index != -1){
+          for(int i=index+1; i<s.size(); i++){
+            ans += s[i];
+          }
+        }
+        return ans;
+    }
+};

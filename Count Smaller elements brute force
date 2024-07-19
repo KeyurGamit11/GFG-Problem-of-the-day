@@ -1,0 +1,23 @@
+Input: arr[] = {12, 1, 2, 3, 0, 11, 4}
+Output: 6 1 1 1 0 1 0
+Explanation: There are 6 smaller elements right
+after 12. There is 1 smaller element right after
+1. And so on.
+#code:
+class Solution {
+  public:
+    vector<int> constructLowerArray(vector<int> &arr) {
+        vector<int>ans;
+        for(int i=0; i<arr.size(); i++){
+            int cnt = 0;
+            for(int j=i+1; j<arr.size(); j++){
+                if(arr[i] > arr[j]){
+                    cnt++;
+                }
+            }
+            ans.push_back(cnt);
+        }
+        return ans;
+    }
+    
+};

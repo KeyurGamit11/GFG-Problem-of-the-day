@@ -1,0 +1,40 @@
+Input: nums = [1, 2, 3, 4]
+Output: true
+Explanation: The preorder traversal of the following BST formed is [2, 1, 3, 4]:
+           2
+         /   \
+        1     3
+               \
+                4
+#step: given is sorted array so first we find mid and that mid is our root , left side of mid is left subtree , right side of mid is right subtree
+#code:
+/*
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val)
+        : data(val)
+        , left(nullptr)
+        , right(nullptr) {}
+};
+*/
+
+class Solution {
+    
+  public:
+    Node* help(vector<int>& nums, int start,int end){
+        if(start >= end){
+            return NULL;
+        }
+        int mid = start + (end-start)/2; //find mid
+        Node *node = new Node(nums[mid]); //take mid as root
+        node -> left = help(nums, start , mid-1); // for left subtree recursive call 
+        node -> right = help(nums,mid+1,end); //for right subtree recursive call
+    }
+    Node* sortedArrayToBST(vector<int>& nums) {
+       Node *root = help(nums,0,nums.size()-1);
+       return root;
+    }
+};

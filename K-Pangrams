@@ -1,0 +1,26 @@
+Input: str = "aaaaaaaaaaaaaaaaaaaaaaaaaa", k = 25 
+Output: true
+Explanation: The word contains 26 instances of 'a'. Since only 25 operations are allowed. We can keep 1 instance and change all others to make str a pangram.
+#code:
+class Solution {
+  public:
+
+    bool kPangram(string str, int k) {
+       int arr[26] = {0};
+       int count =0;
+       int opr=0;
+       for(int i=0; i<str.size(); i++){
+           if(str[i] != ' '){
+               arr[str[i]-'a']++;//simply we count alphabet occur ,each one how many time occur
+               count++;
+           }
+       }
+       //so we put 1 in arr if that alphabet occur else 0
+       for(int i=0; i<26; i++){
+           if(arr[i] == 0){ // 0 means that alphabet not present so wo count how many op need
+               opr++;
+           }
+       }
+       return (opr <= k) && (count>=26); //count means how many alphabet and op show how many need to make
+    }
+};

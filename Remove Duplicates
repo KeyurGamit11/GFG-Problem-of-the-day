@@ -1,0 +1,23 @@
+Input: str = "zvvo"
+Output: "zvo"
+Explanation: Only keep the first occurrence
+#do dry run for better understanding
+#code:
+// User function template for C++
+class Solution {
+  public:
+
+    string removeDups(string str) {
+        int arr[26] = {0};
+        int j=0;
+        
+        for(int i=0; i<str.size(); i++){
+            if(arr[str[i] -'a'] == 0){ // 0 means it occur first time
+                str[j] = str[i];
+                j++;
+            }
+            arr[str[i] - 'a'] = 1; // if first time put 1 so we can check that is uniwue or not
+        }
+        return str.substr(0,j); // we have to return till j 
+    }
+};

@@ -1,0 +1,28 @@
+Examples :
+Input: arr[][] = [[0, 1, 1, 1],[0, 0, 1, 1],[1, 1, 1, 1],[0, 0, 0, 0]]
+Output: 2
+Explanation: Row 2 contains 4 1's (0-based indexing).
+#code:
+// User function template for C++
+class Solution {
+  public:
+    int rowWithMax1s(vector<vector<int> > arr) {
+        int maxcnt=0;
+        int rowind=-1;
+        int n=arr.size();
+        int m=arr[0].size();
+        for(int i=0; i<n; i++){
+            int cnt =0;
+            for(int j=0; j<m; j++){
+                if(arr[i][j] == 1){
+                    cnt++; // do count of 1 in eacch row
+                }
+            }
+            if (cnt > maxcnt){ // if count is more than max we store that in max and update row ind
+                maxcnt = cnt;
+                rowind =i;
+            }
+        }
+        return rowind;
+    }
+};

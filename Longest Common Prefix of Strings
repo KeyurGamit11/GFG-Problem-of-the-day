@@ -1,0 +1,36 @@
+Input: arr[] = ["geeksforgeeks", "geeks", "geek", "geezer"]
+Output: gee
+Explanation: "gee" is the longest common prefix in all the given strings.
+#code:
+// User function template for C++
+
+class Solution {
+  public:
+
+    string longestCommonPrefix(vector<string> arr) {
+       int minlen=1001; // length of shortest string in arr
+       int cnt=0;
+       string ans="";
+       //first finding shortest stirng in arr
+       for(int i=0; i<arr.size(); i++){
+           int len= arr[i].size();
+           if(len < minlen){
+               minlen = len;
+               ans= arr[i];
+           }
+       }
+       //check shortest string with all other string
+       for(int i=0; i<minlen; i++){
+           for(int j=0; j<arr.size(); j++){
+               if(arr[j][i] != ans[i]){
+                   ans = ans.substr(0,cnt);
+               }
+           }
+           cnt++; // if we found same char we incre cnt
+       }
+       if(ans.length() == 0){
+           return "-1";
+       }
+       return ans;
+    }
+};

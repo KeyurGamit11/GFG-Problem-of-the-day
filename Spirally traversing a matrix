@@ -1,0 +1,52 @@
+Input: matrix[][] = [[1, 2, 3, 4],
+                  [5, 6, 7, 8],
+                  [9, 10, 11, 12],
+                  [13, 14, 15,16]]
+Output: [1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10]
+#just do dry run according to code you will understand 
+#code:
+class Solution {
+  public:
+    vector<int> spirallyTraverse(vector<vector<int> > &matrix) {
+       int n = matrix.size();
+       int m = matrix[0].size();
+       vector<int>ans;
+       int cnt=0;
+       
+       int StartingRow=0;
+       int StartingCol=0;
+       int EndingRow=n-1;
+       int EndingCol = m-1;
+       
+       while(cnt < n*m){
+           //first row printing , left to right
+           for(int i=StartingCol; cnt < n*m && i<=EndingCol; i++){
+               ans.push_back(matrix[StartingRow][i]);
+               cnt++;
+           }
+           StartingRow++;
+           
+           //last col , top to bottom
+           for(int i=StartingRow; cnt < n*m && i<= EndingRow; i++){
+               ans.push_back(matrix[i][EndingCol]);
+               cnt++;
+           }
+           EndingCol--;
+           
+           //last row , right to left
+           for(int i=EndingCol; cnt < n*m && i>=StartingCol; i--){
+               ans.push_back(matrix[EndingRow][i]);
+               cnt++;
+           }
+           EndingRow--;
+           
+           //first col , bottom to top
+           for(int i=EndingRow; cnt < n*m && i>=StartingRow; i--){
+               ans.push_back(matrix[i][StartingCol]);
+               cnt++;
+           }
+           StartingCol++;
+       }
+       return ans;
+    }
+};

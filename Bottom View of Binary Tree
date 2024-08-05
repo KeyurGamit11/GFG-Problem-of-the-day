@@ -1,0 +1,34 @@
+                      20
+                    /    \
+                  8       22
+                /   \     /   \
+              5      3 4     25
+                     /    \      
+                 10       14
+
+For the above tree, the output should be 5 10 4 14 25.
+#code:
+//Function to return a list containing the bottom view of the given tree.
+
+class Solution {
+  public:
+    void solve(Node *root , int x, int y, map<int,pair<int,int>>&mp){
+        if(root == NULL){
+            return;
+        }
+        if(mp.find(x) == mp.end() || mp[x].first <= y){
+            mp[x] = {y,root->data}; // if we found same horizontal distance check it with y and update it
+        }
+        solve(root -> left , x-1,y+1,mp);
+        solve(root -> right, x+1,y+1,mp);
+    }
+    vector <int> bottomView(Node *root) {
+        map<int,pair<int,int>>mp;
+        solve(root,0,0,mp);
+        vector<int>ans;
+        for(auto i:mp){
+            ans.push_back(i.second.second);
+        }
+        return ans;
+    }
+};

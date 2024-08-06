@@ -1,0 +1,28 @@
+Input: str = 222.111.111.111
+Output: true
+Explanation: Here, the IPv4 address is as per the criteria mentioned and also all four decimal numbers lies in the mentioned range.
+#code:
+/* The function returns 1 if
+IP string is valid else return 0
+You are required to complete this method */
+class Solution {
+  public:
+    int isValid(string str) {
+       int dots=0;
+       for(int i=0; i<str.size(); i++){
+           string num="";
+           while(i<str.size() && str[i] != '.'){ // if we get . so we add in num 
+               num += str[i];
+               i++;
+           }
+           if(str[i] == '.'){ // count of dots
+               dots++;
+           }
+           int number=stoi(num);
+           if(number>255){
+               return false;
+           }
+       }
+       return dots == 3;
+    }
+};

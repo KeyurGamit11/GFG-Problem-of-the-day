@@ -1,0 +1,42 @@
+Input:
+          10
+        /    \
+      20      30
+    /   \ 
+   10    10
+Output: false
+Explanation: The given tree is not a sum tree. For the root node, sum of elements in left subtree is 40 and sum of elements in right subtree is 30. Root element = 10 which is not equal to 30+40.
+#code:
+/*  Tree node
+struct Node
+{
+    int data;
+    Node* left, * right;
+}; */
+
+// Should return true if tree is Sum Tree, else false
+class Solution {
+  public:
+    int traverse(Node *root){
+        if(root == NULL){
+            return 0;
+        }
+        int left=traverse(root -> left);
+        int right=traverse(root->left);
+        return root->data + left + right;
+    }
+    bool isSumTree(Node* root) {
+       if(root == NULL){
+           return true;
+       }
+       if(root->left == NULL && root->right == NULL){
+           return true;
+       }
+       if(root -> left != NULL || root -> right != NULL){
+           if(root -> data != traverse(root->left) + traverse(root->right)){
+               return false;
+           }
+       }
+       return isSumTree(root->left) && isSumTree(root->right);
+    }
+};

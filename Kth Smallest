@@ -1,0 +1,15 @@
+Input: arr[] = [7, 10, 4, 3, 20, 15], k = 3
+Output:  7
+Explanation: 3rd smallest element in the given array is 7.
+#code:
+// User function template for C++
+
+class Solution {
+  public:
+    // arr : given array
+    // k : find kth smallest element and return using this function
+    int kthSmallest(vector<int> &arr, int k) {
+        sort(arr.begin(), arr.end());
+        return arr[k-1];
+    }
+};

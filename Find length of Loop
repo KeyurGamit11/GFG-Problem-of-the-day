@@ -1,0 +1,43 @@
+Input: LinkedList: 25->14->19->33->10->21->39->90->58->45, c = 4
+Output: 7
+Explanation: The loop is from 33 to 45. So length of loop is 33->10->21->39-> 90->58->45 = 7. 
+The number 33 is connected to the last node of the linkedlist to form the loop because according to the input the 4th node from the beginning(1 based indexing) 
+will be connected to the last node for the loop.
+#code:
+/*
+
+struct Node {
+    int data;
+    struct Node *next;
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
+};
+
+*/
+class Solution {
+  public:
+    // Function to find the length of a loop in the linked list.
+    int LengthofLoop(Node* fast , Node* slow){
+        int cnt=1;
+        fast = fast -> next;
+        while(slow != fast){
+            cnt++;
+            fast = fast -> next;
+        }
+        return cnt;
+    }
+    int countNodesinLoop(Node *head) {
+        Node* fast = head;
+        Node* slow = head;
+        while(fast != NULL && fast -> next != NULL){
+            slow = slow -> next;   // sow move by one step
+            fast = fast -> next -> next; //fast move by two step
+            if(fast == slow){
+                return LengthofLoop(fast , slow);
+            }
+        }
+        return 0;
+    }
+};

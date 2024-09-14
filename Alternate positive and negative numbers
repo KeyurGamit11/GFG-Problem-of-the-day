@@ -1,0 +1,36 @@
+Input: arr[] = [9, 4, -2, -1, 5, 0, -5, -3, 2]
+Output: 9 -2 4 -1 5 -5 0 -3 2
+Explanation: Positive elements : [9,4,5,0,2]
+Negative elements : [-2,-1,-5,-3]
+As we need to maintain the relative order of postive elements and negative elements we will pick each element from the positive and negative and will store them. If any of the positive and negative numbersare completed. we will continue with the remaining signed elements.
+The output is 9,-2,4,-1,5,-5,0,-3,2.
+#code:
+// User function template for C++
+class Solution {
+  public:
+
+    void rearrange(vector<int> &arr) {
+        vector<int>pos;
+        vector<int>neg;
+        for(int i=0; i<arr.size(); i++){
+            if(arr[i]<0){
+                neg.push_back(arr[i]);
+            }
+            else{
+                pos.push_back(arr[i]);
+            }
+        }
+        int i=0,j=0,k=0;
+        while(i<pos.size() && j<neg.size()){
+            arr[k++]=pos[i++]; //in arr put pos val
+            arr[k++] = neg[j++]; // in arr put neg val
+        }
+         while(i<pos.size()){
+            arr[k++]=pos[i++];
+        }
+        while(j<neg.size()){
+            arr[k++]=neg[j++];
+        }
+       
+    }
+};

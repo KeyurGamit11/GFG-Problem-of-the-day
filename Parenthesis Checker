@@ -1,0 +1,33 @@
+Input: {([])}
+Output: true
+Explanation: { ( [ ] ) }. Same colored brackets can form balanced pairs, with 0 number of unbalanced bracket.
+#code:
+
+class Solution
+{
+    public:
+    //Function to check if brackets are balanced or not.
+    bool ispar(string x)
+    {
+        stack<char>st;
+        for(auto ch:x){
+            if( ch =='{' || ch == '(' || ch == '['){
+                st.push(ch);
+            }
+            else {
+                if(st.empty()){
+                    return false;
+                }
+                if((ch==')' && st.top()=='(')||
+                (ch=='}' && st.top() == '{') ||
+                (ch==']' && st.top() == '[')){
+                    st.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        return st.empty();
+    }
+};

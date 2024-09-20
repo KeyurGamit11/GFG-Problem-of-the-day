@@ -1,0 +1,18 @@
+Input: height = [7, 4, 8, 2, 9]
+Output: 3
+Explanation: As 7 is the first element, it can see the sunrise. 4 can't see the sunrise as 7 is hiding it. 8 can see. 2 can't see the sunrise. 9 also can see
+the sunrise.
+#code:
+  public:
+    // Returns count buildings that can see sunlight
+    int countBuildings(vector<int> &height) {
+        int cnt=1;
+        int maxi = height[0];
+        for(int i=1; i<height.size(); i++){
+            if(height[i] > maxi){
+                cnt++;
+                maxi = height[i];
+            }
+        }
+        return cnt;
+    }

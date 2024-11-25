@@ -1,0 +1,26 @@
+#Problem Link : Input: arr[] = [-2, 6, -3, -10, 0, 2]
+Output: 180
+Explanation: The subarray with maximum product is {6, -3, -10} with product = 6 * (-3) * (-10) = 180.
+#code:
+// User function Template for C++
+class Solution {
+  public:
+    // Function to find maximum product subarray
+    int maxProduct(vector<int> &arr) {
+        int pref=1,suff=1, maxi =INT_MIN;
+        for(int i=0; i<arr.size(); i++){
+           
+            if(pref==0){
+                pref=1;
+               
+            }
+            if(suff==0){
+                suff=1;
+            }
+            pref *= arr[i];
+            suff *= arr[arr.size()-i-1];
+            maxi = max(maxi , max(suff,pref));
+        }
+        return maxi;
+    }
+};

@@ -1,0 +1,22 @@
+Input: arr[] = [12, 5, 787, 1, 23], k = 2
+Output: [787, 23]
+Explanation: 1st largest element in the array is 787 and second largest is 23
+#code:
+class Solution {
+  public:
+    vector<int> kLargest(vector<int>& arr, int k) {
+        vector<int>ans;
+        priority_queue<int>pq;
+        for(int num:arr){
+            pq.push(num);
+        }
+        while(k--){
+            
+            int el = pq.top();
+            ans.push_back(el);
+            pq.pop();
+            
+        }
+        return ans;
+    }
+};
